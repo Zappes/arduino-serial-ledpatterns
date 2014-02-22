@@ -25,7 +25,7 @@
 #define DATA_PIN 11
 
 // the serial port from which we read patterns
-#define COMPORT Serial
+#define COMPORT Serial1
 
 // the speed of the serial port
 #define COMSPEED 9600
