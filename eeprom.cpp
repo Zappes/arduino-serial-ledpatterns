@@ -18,10 +18,6 @@ void persistPatterns(byte *patterns, int patternCount) {
   
   eeprom_write_block((const void*)&desc, (void*)0, sizeof(desc));
   eeprom_write_block((const void*)patterns, (void*)sizeof(desc), patternCount);
-  
-  // writing to the eeprom takes some time. the delay makes sure that we dont accidentally
-  // write to the eeprom again before the first write is complete.
-  delay(10);
 }
 
 int restorePatterns(byte *patterns, int maxPatternCount) {

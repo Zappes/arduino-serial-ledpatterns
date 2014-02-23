@@ -38,7 +38,7 @@
 // the patterns parsed from the serial port will be stored here
 // the pattern buffer size defines the maximum number of patterns
 // that may be sent in a serial command.
-#define PATTERN_BUFFER_SIZE 32
+#define PATTERN_BUFFER_SIZE 64
 byte patternBuffer[PATTERN_BUFFER_SIZE];
 byte patternCount;
 
@@ -60,9 +60,6 @@ void setup() {
   
   // start listening on the com port
   COMPORT.begin(COMSPEED);
-  
-  COMPORT.print("Restored patterns: ");
-  COMPORT.println(patternCount);
 }
 
 void loop() {
@@ -131,8 +128,9 @@ void readPatternsFromSerial() {
       commandCursor = 0;
 
       parsePatternsToBuffer(commandBuffer);
-      
       persistPatterns(patternBuffer, patternCount);
+      COMPORT.print("OK ");
+      COMPORT.println(patternCount);
     }
     else
     {
