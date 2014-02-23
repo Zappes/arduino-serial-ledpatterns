@@ -7,6 +7,8 @@ This Arduino sketch builds up on the tutorial for shift registers that can be fo
 
 If you want to see this in action, have a lok here: http://www.youtube.com/watch?v=WX1ofkRAVps
 
+The current pattern list will be stored in the Arduino's EEPROM and retrieved when powering up the next time, so one doesn't have to reprogram the patterns after powering down the chip.
+
 Hardware
 --------
 For the example to work, you need two things:

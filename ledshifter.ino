@@ -17,6 +17,8 @@
  This piece of code is public domain, this is the license: http://unlicense.org/UNLICENSE
  ********************************************************************************************/
 
+#include "eeprom.h"
+
 // Pin connected to ST_CP of 74HC595
 #define LATCH_PIN 8
 // Pin connected to SH_CP of 74HC595
@@ -54,9 +56,13 @@ void setup() {
   // switch off the LEDs
   writeToLeds(0);
   
+  patternCount = restorePatterns(patternBuffer, PATTERN_BUFFER_SIZE);
+  
   // start listening on the com port
   COMPORT.begin(COMSPEED);
   
+  COMPORT.print("Restored patterns: ");
+  COMPORT.println(patternCount);
 }
 
 void loop() {
@@ -125,6 +131,8 @@ void readPatternsFromSerial() {
       commandCursor = 0;
 
       parsePatternsToBuffer(commandBuffer);
+      
+      persistPatterns(patternBuffer, patternCount);
     }
     else
     {
@@ -132,3 +140,4 @@ void readPatternsFromSerial() {
     }
   }
 }
+
